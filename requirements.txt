@@ -2,3 +2,4 @@ pandas>=1.3.0
 openpyxl
 matplotlib
 folium
+Pillow
