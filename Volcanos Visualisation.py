@@ -68,8 +68,8 @@ def visualize_volcano_sky():
     fig.patch.set_facecolor('black')
     ax.set_facecolor('black')
 
-    # --- Set up colormap to match star colors ---
-    cmap = plt.get_cmap('plasma')
+    # --- Set up colormap to match star colors (Yellow-Orange-Red) ---
+    cmap = plt.get_cmap('YlOrRd')
     norm = plt.Normalize(vmin=df['Max VEI'].min(), vmax=df['Max VEI'].max())
 
     # --- Connect stars with the same Visual score in a chain ---
@@ -87,23 +87,21 @@ def visualize_volcano_sky():
                 end = coordinates[i+1]
                 ax.plot([start[0], end[0]], [start[1], end[1]], color=line_color, alpha=0.6, linewidth=0.9, zorder=5)
 
-    # Plot volcanoes as stars with size and color based on Max VEI
+    # Plot volcanoes as translucent circles with size and color based on Max VEI
     scatter = ax.scatter(
         df['Longitude'], 
         df['Latitude'], 
         s=df['Visual'],           # Size based on the new 'Visual' column
         c=df['Max VEI'],          # Color based on VEI
-        cmap=cmap,                # Use the same colormap
+        cmap=cmap,                # Use the new 'hot' colormap
         norm=norm,                # And the same normalization
-        marker='*',
-        alpha=0.9,
-        edgecolor='white',
-        linewidth=0.5,
-        zorder=10                 # Ensure stars are plotted on top of the lines
+        marker='o',               # Change marker to circle
+        alpha=0.7,                # Make circles translucent
+        zorder=10                 # Ensure circles are plotted on top of the lines
     )
 
     # Customize the plot
-    ax.set_title('Volcano Chains with Matched Colors', color='white', fontsize=16)
+    ax.set_title('Volcano Hotspots', color='white', fontsize=16)
     ax.set_xlabel('Longitude', color='gray')
     ax.set_ylabel('Latitude', color='gray')
     ax.grid(False)
@@ -117,10 +115,10 @@ def visualize_volcano_sky():
     plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='white')
 
     # Save the figure
-    output_path = Path(__file__).parent / 'volcano_chains_colored.png'
+    output_path = Path(__file__).parent / 'volcano_hot_circles.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight', facecolor='black')
     
-    print(f"--- 'Volcano Chains' Map Updated ---")
+    print(f"--- 'Volcano Hotspots' Map Created ---")
     print(f"Image saved to: {output_path}")
 
 
