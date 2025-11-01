@@ -2,7 +2,7 @@
 
 This project processes and visualizes volcano data from an Excel file, creating both static and interactive geographical plots. It identifies volcanoes by their Volcanic Explosivity Index (VEI) and plots them on a world map, styled to look like a celestial map of "hotspots."
 
-![Volcano Hotspots Visualization](3_volcano_hot_circles.png)
+![Volcano Hotspots Visualization](volcano_hot_circles.png)
 
 ---
 
